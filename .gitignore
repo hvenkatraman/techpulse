@@ -1,0 +1,35 @@
+# Ignore Jekyll's generated `_site` directory
+_site/
+
+# Ignore Jekyll's cache and metadata files
+.jekyll-cache/
+.sass-cache/
+.jekyll-metadata
+
+# Ignore temporary and system files
+.DS_Store
+Thumbs.db
+
+# Ignore dependency directories
+node_modules/
+vendor/
+
+# Ignore log and debug files
+*.log
+
+# Ignore package manager lockfiles (optional)
+npm-debug.log
+yarn-error.log
+
+# Ignore Bundler's installed gems (if using Bundler)
+.bundle/
+
+# Ignore compiled assets (if applicable)
+*.gem
+public/assets/
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
