@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-size: 5em; /* Default size for large screens */
+            text-align: center;
+            padding: 0 10px; /* Add some padding for smaller screens */
+            position: relative; /* Ensure positioning for child elements */
+        }
+        .content {
+            width: 100%;
+            max-width: 600px; /* Maximum width for content */
+        }
+        .quote {
+            font-size: 0.3em; /* Adjust quote size */
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+        .button {
+            margin-top: 20px;
+            font-size: 0.3em; /* Adjust the button text size */
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .social-links {
+            position: absolute; /* Position the element absolutely */
+            top: 20px; /* Position from the top */
+            right: 20px; /* Position from the right */
+            display: flex;
+            align-items: center; /* Align items in a single row */
+            font-size: 0.4em; /* Adjust the text size */
+        }
+        .social-links p {
+            margin: 0;
+            font-size: 0.5em; /* Increase text size */
+            font-weight: bold; /* Make the text bold */
+            margin-right: 10px; /* Space between text and icons */
+        }
+        .icons {
+            display: flex;
+            gap: 15px; /* Space between icons */
+        }
+        .icons a img {
+            height: 40px; /* Adjust the icon size */
+            width: 40px; /* Adjust the icon size */
+            transition: transform 0.2s ease-in-out; /* Smooth transition for hover effect */
+        }
+        .icons a img:hover {
+            transform: scale(1.1); /* Slightly increase size on hover */
+        }
+        @media (max-width: 768px) {
+            body {
+                font-size: 3em; /* Smaller text size for tablets */
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 2em; /* Smaller text size for phones */
+            }
+            .social-links {
+                top: 10px; /* Adjust position for smaller screens */
+                right: 10px; /* Adjust position for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="social-links">
+        <p>Follow us on:</p>
+        <div class="icons">
+            {% for social in site.social %}
+                <a href="{{ social.url | default: '#' }}">
+                    <img src="{{ site.baseurl }}/assets/images/{{ social.icon }}" alt="{{ social.name }}">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="content">
+        {{ content }}
+        <div class="quote">"Innovating the future, one pulse at a time."</div>
+    </div>
+    <a href="/techpulse/home" class="button">Go to Home Page</a>
+</body>
+</html>

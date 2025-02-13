@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+    {% include head.html %}
+    <style>
+        /* Theme Styles */
+        body.light-mode {
+            background: #ffffff;
+            color: #000000;
+        }
+        body.dark-mode {
+            background: #1e1e1e;
+            color: #ffffff;
+        }
+        body.solarized-mode {
+            background: #fdf6e3;
+            color: #657b83;
+        }
+        body.blue-mode {
+            background: #0d6efd; /* Bootstrap blue */
+            color: #ffffff;
+        }
+        body.indigo-mode {
+            background: #4b0082; /* Indigo */
+            color: #ffffff;
+        }
+        body.darkblue-mode {
+            background: #00008b; /* Dark Blue */
+            color: #ffffff;
+        }
+        body.volcano-mode {
+            background: #ff4500; /* Orange-Red (Volcano) */
+            color: #000000;
+        }
+
+        /* Restore Minima's page layout */
+        .page-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .social-links a img {
+            height: 30px;
+            width: 30px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .social-links a img:hover {
+            transform: scale(1.1);
+        }
+        /* Ensure good visibility for post titles and dates */
+.post-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--title-color, #000000); /* Default: Black */
+}
+
+.post-date {
+    font-size: 1.2em;
+    color: var(--date-color, #333333); /* Default: Dark Gray */
+    font-style: italic;
+}
+
+/* Dark Mode Adjustments */
+.dark-mode {
+    --title-color: #ffffff; /* White */
+    --date-color: #cccccc; /* Light Gray */
+}
+
+/* Solarized Mode Adjustments */
+.solarized-mode {
+    --title-color: #586e75; /* Dark Greenish */
+    --date-color: #657b83; /* Muted Gray */
+}
+
+/* Blue Mode Adjustments */
+.blue-mode {
+    --title-color: #ffdd57; /* Bright Yellow */
+    --date-color: #ffcc00; /* Gold */
+}
+
+/* Indigo Mode Adjustments */
+.indigo-mode {
+    --title-color: #ffccff; /* Soft Pink */
+    --date-color: #ffd700; /* Gold */
+}
+
+/* Dark Blue Mode Adjustments */
+.darkblue-mode {
+    --title-color: #add8e6; /* Light Blue */
+    --date-color: #87cefa; /* Sky Blue */
+}
+
+/* Volcano Mode Adjustments */
+.volcano-mode {
+    --title-color: #ffffff; /* White */
+    --date-color: #000000; /* Black */
+}
+
+        /* Theme Switcher (Hidden by Default) */
+        .theme-switcher {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .theme-switcher select {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .social-links {
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <!-- Minima Header -->
+    {% include header.html %}
+
+    <!-- Social Icons Below Navigation -->
+    <div class="social-links" style="justify-content: center; margin-top: 10px;">
+        <a href="https://github.com/" target="_blank">
+            <img src="{{ site.baseurl }}/assets/images/github-icon.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank">
+            <img src="{{ site.baseurl }}/assets/images/linkedin-icon.png" alt="LinkedIn">
+        </a>
+        <a href="https://web.whatsapp.com/" target="_blank">
+            <img src="{{ site.baseurl }}/assets/images/whatsapp-icon.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank">
+            <img src="{{ site.baseurl }}/assets/images/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank">
+            <img src="{{ site.baseurl }}/assets/images/youtube-icon.png" alt="YouTube">
+        </a>
+    </div>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        {{ content }}
+    </main>
+
+    <!-- Minima Footer -->
+    {% include footer.html %}
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <label for="theme">Select Theme:</label>
+        <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="solarized">Solarized</option>
+            <option value="blue">Blue</option>
+            <option value="indigo">Indigo</option>
+            <option value="darkblue">Dark Blue</option>
+            <option value="volcano">Volcano</option>
+        </select>
+    </div>
+
+    <script>
+        // Apply saved theme across all pages
+        function applySavedTheme() {
+            const savedTheme = localStorage.getItem("theme") || "light";
+            document.body.className = savedTheme + "-mode";
+            document.getElementById("theme").value = savedTheme;
+        }
+
+        // Change theme and store selection
+        function changeTheme(theme) {
+            localStorage.setItem("theme", theme);
+            applySavedTheme();
+        }
+
+        // Show switcher if "~switch" is in URL
+        function checkForSwitcher() {
+            if (window.location.href.includes("~switch")) {
+                document.getElementById("themeSwitcher").style.display = "block";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            applySavedTheme();
+            checkForSwitcher();
+            document.getElementById("theme").addEventListener("change", function () {
+                changeTheme(this.value);
+            });
+        });
+    </script>
+
+</body>
+</html>

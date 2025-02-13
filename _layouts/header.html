@@ -1,0 +1,138 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
+
+    <!-- Site Title with Dynamic Theme Color -->
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+
+    {%- if page_paths -%}
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger" class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+          </svg>
+        </label>
+
+        <!-- Responsive Hamburger Menu -->
+        <ul class="menu">
+          {%- for path in page_paths -%}
+            {%- assign my_page = site.pages | where: "path", path | first -%}
+            {%- if my_page.title -%}
+              <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+</header>
+
+<style>
+  /* Default Site Title */
+  .site-title {
+      font-size: 2em;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--header-title-color, #000000); /* Default: Black */
+  }
+
+  /* Navigation Menu */
+  .site-nav {
+      position: relative;
+  }
+
+  .menu {
+      display: none;
+      list-style: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: var(--bg-color);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+  }
+
+  .menu li {
+      margin: 10px 0;
+  }
+
+  .menu a {
+      color: var(--nav-link-color, #000000);
+      text-decoration: none;
+  }
+
+  .menu a:hover {
+      text-decoration: underline;
+  }
+
+  /* Show menu when checkbox is checked */
+  .nav-trigger {
+      display: none;
+  }
+
+  .nav-trigger:checked + .menu-icon + .menu {
+      display: block;
+  }
+
+  /* Theme-Specific Adjustments */
+  .dark-mode {
+      --header-title-color: #ffffff; /* White */
+      --nav-link-color: #dddddd; /* Light Gray */
+  }
+
+  .solarized-mode {
+      --header-title-color: #657b83; /* Muted Gray */
+      --nav-link-color: #586e75;
+  }
+
+  .blue-mode {
+      --header-title-color: #ffdd57; /* Bright Yellow */
+      --nav-link-color: #ffd700; /* Gold */
+  }
+
+  .indigo-mode {
+      --header-title-color: #ffccff; /* Soft Pink */
+      --nav-link-color: #ffd700; /* Gold */
+  }
+
+  .darkblue-mode {
+      --header-title-color: #add8e6; /* Light Blue */
+      --nav-link-color: #87cefa; /* Sky Blue */
+  }
+
+  .volcano-mode {
+      --header-title-color: #ffffff; /* White */
+      --nav-link-color: #000000; /* Black */
+  }
+/* Fix Navigation Bar Transparency */
+.site-header {
+    background-color: var(--nav-bg-color, #ffffff) !important; /* Default White */
+    width: 100%;
+    height: 60px; /* Ensure it has a height */
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex; /* Ensure it does not collapse */
+    align-items: center; /* Center content */
+}
+
+/* Ensure Body Starts After Header */
+body {
+    padding-top: 70px; /* Push content down so it doesn’t overlap */
+}
+
+/* Background Colors for Themes */
+.dark-mode .site-header { background-color: #121212 !important; }
+.solarized-mode .site-header { background-color: #fdf6e3 !important; }
+.blue-mode .site-header { background-color: #0d6efd !important; }
+.indigo-mode .site-header { background-color: #4b0082 !important; }
+.darkblue-mode .site-header { background-color: #00008b !important; }
+.volcano-mode .site-header { background-color: #ff4500 !important; }
+</style>

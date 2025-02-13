@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">TechPulse</title>
+    <style>
+        /* Default Light Theme */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #007BFF;
+            --button-text: #ffffff;
+            --social-hover: #0056b3;
+        }
+
+        /* Dark Theme */
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1e90ff;
+            --button-text: #000000;
+            --social-hover: #007BFF;
+        }
+
+        /* Solarized Theme */
+        .solarized-mode {
+            --bg-color: #fdf6e3;
+            --text-color: #657b83;
+            --button-bg: #268bd2;
+            --button-text: #ffffff;
+            --social-hover: #073642;
+        }
+
+        /* High Contrast Theme */
+        .contrast-mode {
+            --bg-color: #000000;
+            --text-color: #ffcc00;
+            --button-bg: #ff0000;
+            --button-text: #ffffff;
+            --social-hover: #ff6600;
+        }
+
+        /* Blue Theme */
+        .blue-mode {
+            --bg-color: #007BFF;
+            --text-color: #ffffff;
+            --button-bg: #0056b3;
+            --button-text: #ffffff;
+            --social-hover: #003f7f;
+        }
+
+        /* Indigo Theme */
+        .indigo-mode {
+            --bg-color: #4b0082;
+            --text-color: #ffffff;
+            --button-bg: #800080;
+            --button-text: #ffffff;
+            --social-hover: #5500a0;
+        }
+
+        /* Dark Blue Theme */
+        .darkblue-mode {
+            --bg-color: #00008b;
+            --text-color: #ffffff;
+            --button-bg: #191970;
+            --button-text: #ffffff;
+            --social-hover: #000066;
+        }
+
+        /* Volcano Theme */
+        .volcano-mode {
+            --bg-color: #ff4500;
+            --text-color: #000000;
+            --button-bg: #cc3700;
+            --button-text: #ffffff;
+            --social-hover: #aa2d00;
+        }
+
+        /* General Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-size: 5em;
+            text-align: center;
+            padding: 0 10px;
+            position: relative;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .quote {
+            font-size: 0.3em;
+            font-style: italic;
+            margin-top: 10px;
+            color: var(--text-color);
+        }
+
+        .button {
+            margin-top: 20px;
+            font-size: 0.3em;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: var(--social-hover);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.5em;
+            margin-bottom: 30px;
+        }
+
+        .social-links p {
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .icons a img {
+            height: 50px;
+            width: 50px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .icons a img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Theme Selector */
+        .theme-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.3em;
+            padding: 10px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* HIDE BY DEFAULT */
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 3em;
+            }
+            .icons a img {
+                height: 45px;
+                width: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 2em;
+            }
+            .social-links {
+                margin-bottom: 20px;
+            }
+            .icons a img {
+                height: 40px;
+                width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden Theme Switcher -->
+    <select class="theme-selector" onchange="changeTheme(this.value)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="solarized">Solarized</option>
+        <option value="contrast">High Contrast</option>
+        <option value="blue">Blue</option>
+        <option value="indigo">Indigo</option>
+        <option value="darkblue">Dark Blue</option>
+        <option value="volcano">Volcano</option>
+    </select>
+
+    <div class="social-links">
+        <p>Follow us on:</p>
+        <div class="icons">
+            {% for social in site.social %}
+                <a href="{{ social.url | default: '#' }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ site.baseurl }}/assets/images/{{ social.icon }}" alt="{{ social.name }}">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="content">
+        {{ content }}
+        <div class="quote">"Innovating the future, one pulse at a time."</div>
+    </div>
+
+    <a href="/techpulse/home" class="button">Go to Home Page</a>
+
+    <!-- JavaScript for Theme and Title Switching -->
+    <script>
+        function changeTheme(theme) {
+            const body = document.body;
+            body.className = ""; // Remove all theme classes
+            if (theme !== "light") {
+                body.classList.add(`${theme}-mode`);
+            }
+
+            // Store the theme preference in localStorage
+            localStorage.setItem("theme", theme);
+
+            // Change the page title dynamically
+            updatePageTitle(theme);
+        }
+
+        function updatePageTitle(theme) {
+            const titleElement = document.getElementById("page-title");
+            const titles = {
+                "light": "TechPulse",
+                "dark": "TechPulse - Dark Mode",
+                "solarized": "TechPulse - Solarized Mode",
+                "contrast": "TechPulse - High Contrast",
+                "blue": "TechPulse - Blue Mode",
+                "indigo": "TechPulse - Indigo Mode",
+                "darkblue": "TechPulse - Dark Blue Mode",
+                "volcano": "TechPulse - Volcano Mode"
+            };
+
+            titleElement.textContent = titles[theme] || "TechPulse";
+        }
+
+        // Show the theme switcher only if URL contains `~switch`
+        function checkForSwitchParameter() {
+            if (window.location.href.includes("~switch")) {
+                document.querySelector(".theme-selector").style.display = "block";
+            }
+        }
+
+        // Apply saved theme and check URL parameter on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme") || "light";
+            document.querySelector(".theme-selector").value = savedTheme;
+            changeTheme(savedTheme);
+            checkForSwitchParameter();
+        };
+    </script>
+</body>
+</html>

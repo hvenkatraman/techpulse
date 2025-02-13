@@ -18,21 +18,24 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your awesome title
-email: your-email@example.com
+title: Tech~Pulse
+dynamic_title: "TechPulse"
+email: techpulse@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+  Stay ahead with the latest trends, innovations, and insights
+    in the world of technology.
+baseurl: "/techpulse" # the subpath of your site, e.g. /blog
+url: "https://hvenkatraman.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: hvenkatraman9
+github_username:  hvenkatraman
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+minima:
+  skin: none  # Disable default Minima skin
+  skin_mode: false  # Disable mode switching if present
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -53,3 +56,45 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+#
+social:
+  - name: Facebook
+    url: https://facebook.com/yourprofile
+    icon: facebook-icon.png
+
+  - name: Twitter
+    url: https://twitter.com/yourprofile
+    icon: twitter-icon.png
+
+  - name: Instagram
+    url: https://instagram.com/yourinstaprofile
+    icon: instagram-icon.png
+
+  - name: GitHub
+    url: https://github.com/yourgithubprofile
+    icon: github-icon.png
+
+  - name: WhatsApp
+    url: https://wa.me/yourwhatsapplink
+    icon: whatsapp-icon.png
+
+  - name: LinkedIn
+    url: https://linkedin.com/in/yourlinkedinprofile
+    icon: linkedin-icon.png
+header_pages:
+  - index.md
+  - about.md
+  - blog.md
+  - contact.md
+  - root.md
+  - tech-posts-list.md
+
+nav:
+  - title: Home
+    url: /
+  - title: Blog
+    url: /blog/
+  - title: About
+    url: /about/
+  - title: Contact
+    url: /contact/

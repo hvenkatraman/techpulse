@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Welcome to Techpulse Post 1"
 date:   2025-02-10 12:08:39 +0530
 categories: jekyll update
 ---
